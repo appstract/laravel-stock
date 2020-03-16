@@ -33,6 +33,6 @@ class CreateStockMutationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('metas');
+        Schema::dropIfExists('stock_mutations');
     }
 }

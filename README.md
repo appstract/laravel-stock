@@ -15,6 +15,8 @@ You can install the package via composer:
 composer require appstract/laravel-stock
 ```
 
+Run `php artisan migrate` to migrate the table. There will now be a `stock_mutations` table in your database.
+
 ## Usage
 
 Adding the `HasStock` trait will enable stock functionality on the Model.

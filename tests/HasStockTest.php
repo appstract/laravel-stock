@@ -4,7 +4,7 @@ namespace Appstract\Stock\Tests;
 
 use Illuminate\Support\Carbon;
 
-class StockTest extends TestCase
+class HasStockTest extends TestCase
 {
     /** @test */
     public function it_can_have_no_stock()

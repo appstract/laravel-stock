@@ -26,7 +26,7 @@ class StockMutationsTest extends TestCase
     public function it_can_have_mutations_with_description()
     {
         $this->stockModel->increaseStock(10, [
-            'description' => 'Test'
+            'description' => 'Test',
         ]);
 
         $mutations = $this->stockModel->stockMutations->pluck(['description'])->toArray();

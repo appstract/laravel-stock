@@ -1,0 +1,51 @@
+{
+    "name": "appstract/laravel-stock",
+    "description": "Keep stock for Eloquent models",
+    "keywords": [
+        "appstract",
+        "laravel-stock"
+    ],
+    "homepage": "https://github.com/appstract/laravel-stock",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gijs Jorissen",
+            "email": "gijs@appstract.nl",
+            "homepage": "https://appstract.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.6",
+        "phpunit/phpunit": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Appstract\\Stock\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Appstract\\Stock\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Appstract\\Stock\\StockServiceProvider"
+            ],
+            "aliases": {
+                "Alias": "Appstract\\Stock\\StockFacade"
+            }
+        }
+    }
+}

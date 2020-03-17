@@ -86,6 +86,7 @@ class HasStockTest extends TestCase
     {
         $this->stockModel->setStock(10);
 
+        $this->assertTrue($this->stockModel->inStock());
         $this->assertTrue($this->stockModel->inStock(10));
         $this->assertTrue($this->stockModel->inStock(8));
         $this->assertFalse($this->stockModel->inStock(11));
@@ -93,6 +94,7 @@ class HasStockTest extends TestCase
 
         $this->stockModel->setStock(-5);
 
+        $this->assertFalse($this->stockModel->inStock());
         $this->assertFalse($this->stockModel->inStock(10));
         $this->assertFalse($this->stockModel->inStock(-5));
     }

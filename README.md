@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require appstract/laravel-stock
 ```
 
-Run `php artisan migrate` to migrate the table. There will now be a `stock_mutations` table in your database.
+By running `php artisan vendor:publish --provider="Appstract\Stock\StockServiceProvider"` in your project all files for this package will be published. Run `php artisan migrate` to migrate the table. There will now be a `stock_mutations` table in your database.
 
 ## Usage
 

@@ -30,7 +30,7 @@ class Book extends Model
 }
 ```
 
-Basic mutations on stock:
+### Basic mutations
 
 ```php
 $book->increaseStock(10);
@@ -39,18 +39,24 @@ $book->mutateStock(10);
 $book->mutateStock(-10);
 ```
 
-Clearing stock. It's also possible to clear the stock and directly setting a new value.
+### Clearing stock
+
+It's also possible to clear the stock and directly setting a new value.
 
 ```php
 $book->clearStock();
 $book->clearStock(10);
 ```
 
-Setting stock. It is possible to set stock. This will create a new mutation with the difference between the old and new value.
+### Setting stock
+
+It is possible to set stock. This will create a new mutation with the difference between the old and new value.
 
 ```php
 $book->setStock(10);
 ```
+
+### Check if model is in stock
 
 It's also possible to check if a product is in stock (with a minimal value).
 
@@ -59,12 +65,16 @@ $book->inStock();
 $book->inStock(10);
 ```
 
+### Current stock
+
 Get the current stock value (on a certain date).
 
 ```php
 $book->stock;
 $book->stock(Carbon::now()->subDays(10));
 ```
+
+### Stock arguments
 
 Add a description and/or reference model to de StockMutation.
 

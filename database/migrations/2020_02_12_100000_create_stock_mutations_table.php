@@ -13,7 +13,7 @@ class CreateStockMutationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_mutations', function (Blueprint $table) {
+        Schema::create(config('laravel-stock.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->morphs('stockable');
             $table->string('reference_type')->nullable();

@@ -11,6 +11,6 @@ return [
     |
     */
 
-    'table' => 'stock_mutations'
+    'table' => 'stock_mutations',
 
 ];

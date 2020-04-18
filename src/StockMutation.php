@@ -20,7 +20,7 @@ class StockMutation extends Model
      */
     public function __construct()
     {
-        $this->setTable(config('laravel-stock.table', 'stock_mutations'));
+        $this->setTable(config('stock.table', 'stock_mutations'));
     }
 
     /**

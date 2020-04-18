@@ -16,6 +16,14 @@ class StockMutation extends Model
     ];
 
     /**
+     * StockMutation constructor.
+     */
+    public function __construct()
+    {
+        $this->setTable(config('laravel-stock.table', 'stock_mutations'));
+    }
+
+    /**
      * Relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo

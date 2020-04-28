@@ -43,6 +43,7 @@ abstract class TestCase extends BaseTest
 
         $this->stockModel = StockModel::first();
         $this->referenceModel = ReferenceModel::first();
+        $this->orderRow = OrderRow::first();
     }
 
     /**
@@ -63,9 +64,17 @@ abstract class TestCase extends BaseTest
             $table->string('name');
         });
 
+        $builder->create('order_rows', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('stock_model_id');
+            $table->string('name');
+            $table->string('amount');
+        });
+
         // Create models
-        StockModel::create(['name' => 'Test']);
-        ReferenceModel::create(['name' => 'Test']);
+        StockModel::create(['name' => 'StockModel']);
+        ReferenceModel::create(['name' => 'ReferenceModel']);
+        OrderRow::create(['stock_model_id' => 1, 'name' => 'OrderRow', 'amount' => 0]);
     }
 
     /**

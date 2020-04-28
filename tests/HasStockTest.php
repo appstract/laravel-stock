@@ -10,6 +10,7 @@ class HasStockTest extends TestCase
     public function it_can_have_no_stock()
     {
         $this->assertEquals(0, $this->stockModel->stock);
+        $this->assertTrue($this->stockModel->outOfStock());
     }
 
     /** @test */
@@ -84,6 +85,8 @@ class HasStockTest extends TestCase
     /** @test */
     public function it_can_check_in_stock()
     {
+        $this->assertTrue($this->stockModel->outOfStock());
+
         $this->stockModel->setStock(10);
 
         $this->assertTrue($this->stockModel->inStock());
@@ -91,6 +94,7 @@ class HasStockTest extends TestCase
         $this->assertTrue($this->stockModel->inStock(8));
         $this->assertFalse($this->stockModel->inStock(11));
         $this->assertTrue($this->stockModel->inStock(-1));
+        $this->assertFalse($this->stockModel->outOfStock());
 
         $this->stockModel->setStock(-5);
 

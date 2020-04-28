@@ -83,6 +83,11 @@ trait HasStock
         return $this->stock > 0 && $this->stock >= $amount;
     }
 
+    public function outOfStock()
+    {
+        return $this->stock <= 0;
+    }
+
     /**
      * Internal function to handle mutations (increase, decrease).
      *

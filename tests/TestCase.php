@@ -50,8 +50,6 @@ abstract class TestCase extends BaseTest
      */
     protected function setUpDatabase($app)
     {
-        $this->createStockMutationsTable();
-
         $builder = $app['db']->connection()->getSchemaBuilder();
 
         // Create tables
@@ -68,11 +66,6 @@ abstract class TestCase extends BaseTest
         // Create models
         StockModel::create(['name' => 'Test']);
         ReferenceModel::create(['name' => 'Test']);
-    }
-
-    protected function createStockMutationsTable()
-    {
-        //
     }
 
     /**

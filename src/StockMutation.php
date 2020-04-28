@@ -18,8 +18,10 @@ class StockMutation extends Model
     /**
      * StockMutation constructor.
      */
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
+
         $this->setTable(config('stock.table', 'stock_mutations'));
     }
 

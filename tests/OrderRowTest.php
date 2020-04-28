@@ -76,6 +76,7 @@ class OrderRowTest extends TestCase
         $this->assertEquals(16, $this->stockModel->stock);
     }
 
+    /** @test */
     public function it_can_change_positive_amount_to_negative()
     {
         $this->stockModel->setStock(10);
@@ -86,6 +87,7 @@ class OrderRowTest extends TestCase
         $this->assertEquals(7, $this->stockModel->stock);
     }
 
+    /** @test */
     public function it_can_change_negative_amount_to_positive()
     {
         $this->stockModel->setStock(10);

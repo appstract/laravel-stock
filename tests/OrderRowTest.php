@@ -103,7 +103,7 @@ class OrderRowTest extends TestCase
         $this->orderRowCreated(18);
         $this->orderRowUpdated(-7);
 
-        $this->assertEquals(9, $this->stockModel->stock);
+        $this->assertEquals(27, $this->stockModel->stock);
     }
 
     /** @test */
@@ -114,7 +114,7 @@ class OrderRowTest extends TestCase
         $this->orderRowCreated(35);
         $this->orderRowUpdated(-5);
 
-        $this->assertEquals(-10, $this->stockModel->stock);
+        $this->assertEquals(25, $this->stockModel->stock);
     }
 
     /** @test */
@@ -125,7 +125,7 @@ class OrderRowTest extends TestCase
         $this->orderRowCreated(-5);
         $this->orderRowUpdated(6);
 
-        $this->assertEquals(9, $this->stockModel->stock);
+        $this->assertEquals(4, $this->stockModel->stock);
     }
 
     /** @test */
@@ -136,7 +136,7 @@ class OrderRowTest extends TestCase
         $this->orderRowCreated(-5);
         $this->orderRowUpdated(20);
 
-        $this->assertEquals(-5, $this->stockModel->stock);
+        $this->assertEquals(-10, $this->stockModel->stock);
     }
 
     /** @test */
@@ -151,7 +151,7 @@ class OrderRowTest extends TestCase
         $this->orderRowUpdated(8);
         $this->orderRowUpdated(-3);
 
-        $this->assertEquals(8, $this->stockModel->stock);
+        $this->assertEquals(13, $this->stockModel->stock);
     }
 
     protected function orderRowCreated($amount)
@@ -175,17 +175,17 @@ class OrderRowTest extends TestCase
         return $this->orderRow->stockModel->mutateStock($deltaStock);
     }
 
-    protected function deltaStock($old, $new)
+    protected function deltaStock($oldAmount, $newAmount)
     {
-        if ($this->positive($old) && $this->negative($new)) {
-            return abs($new);
+        if ($this->positive($oldAmount) && $this->negative($newAmount)) {
+            return abs($oldAmount) + abs($newAmount);
         }
 
-        if ($this->negative($old) && $this->positive($new)) {
-            return abs($new) * -1;
+        if ($this->negative($oldAmount) && $this->positive($newAmount)) {
+            return (abs($oldAmount) + abs($newAmount)) * -1;
         }
 
-        return $old - $new;
+        return $oldAmount - $newAmount;
     }
 
     protected function negative($integer)

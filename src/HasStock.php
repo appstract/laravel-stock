@@ -120,10 +120,10 @@ trait HasStock
     public function scopeWhereInStock($query)
     {
         return $query->where(function ($query) {
-            return $query->whereHas('stockMutations', function($query) {
+            return $query->whereHas('stockMutations', function ($query) {
                 return $query->select('stockable_id')
                     ->groupBy('stockable_id')
-                    ->havingRaw("SUM(amount) > 0");
+                    ->havingRaw('SUM(amount) > 0');
             });
         });
     }
@@ -131,10 +131,10 @@ trait HasStock
     public function scopeWhereOutOfStock($query)
     {
         return $query->where(function ($query) {
-            return $query->whereHas('stockMutations', function($query) {
+            return $query->whereHas('stockMutations', function ($query) {
                 return $query->select('stockable_id')
                     ->groupBy('stockable_id')
-                    ->havingRaw("SUM(amount) <= 0");
+                    ->havingRaw('SUM(amount) <= 0');
             })->orWhereDoesntHave('stockMutations');
         });
     }

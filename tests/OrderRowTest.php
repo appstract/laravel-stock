@@ -2,8 +2,6 @@
 
 namespace Appstract\Stock\Tests;
 
-use Illuminate\Support\Carbon;
-
 class OrderRowTest extends TestCase
 {
     /** @test */

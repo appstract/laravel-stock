@@ -55,7 +55,7 @@ class OrderRowTest extends TestCase
     }
 
     /** @test */
-    public function it_can_change_positive_amount_to_positive()
+    public function it_can_change_positive_amount_to_positive_become_positive()
     {
         $this->stockModel->setStock(10);
 
@@ -65,8 +65,18 @@ class OrderRowTest extends TestCase
         $this->assertEquals(2, $this->stockModel->stock);
     }
 
+    public function it_can_change_positive_amount_to_positive_become_negative()
+    {
+        $this->stockModel->setStock(10);
+
+        $this->orderRowCreated(5);
+        $this->orderRowUpdated(13);
+
+        $this->assertEquals(-8, $this->stockModel->stock);
+    }
+
     /** @test */
-    public function it_can_change_negative_amount_to_negative()
+    public function it_can_change_negative_amount_to_negative_become_positive()
     {
         $this->stockModel->setStock(10);
 
@@ -77,18 +87,40 @@ class OrderRowTest extends TestCase
     }
 
     /** @test */
-    public function it_can_change_positive_amount_to_negative()
+    public function it_can_change_negative_amount_to_negative_become_negative()
     {
-        $this->stockModel->setStock(10);
+        $this->stockModel->setStock(-30);
 
-        $this->orderRowCreated(5);
-        $this->orderRowUpdated(-2);
+        $this->orderRowCreated(-10);
+        $this->orderRowUpdated(-6);
 
-        $this->assertEquals(7, $this->stockModel->stock);
+        $this->assertEquals(-24, $this->stockModel->stock);
     }
 
     /** @test */
-    public function it_can_change_negative_amount_to_positive()
+    public function it_can_change_positive_amount_to_negative_become_positive()
+    {
+        $this->stockModel->setStock(20);
+
+        $this->orderRowCreated(18);
+        $this->orderRowUpdated(-7);
+
+        $this->assertEquals(9, $this->stockModel->stock);
+    }
+
+    /** @test */
+    public function it_can_change_positive_amount_to_negative_become_negative()
+    {
+        $this->stockModel->setStock(20);
+
+        $this->orderRowCreated(35);
+        $this->orderRowUpdated(-5);
+
+        $this->assertEquals(-10, $this->stockModel->stock);
+    }
+
+    /** @test */
+    public function it_can_change_negative_amount_to_positive_become_positive()
     {
         $this->stockModel->setStock(10);
 
@@ -99,16 +131,27 @@ class OrderRowTest extends TestCase
     }
 
     /** @test */
+    public function it_can_change_negative_amount_to_positive_become_negative()
+    {
+        $this->stockModel->setStock(10);
+
+        $this->orderRowCreated(-5);
+        $this->orderRowUpdated(20);
+
+        $this->assertEquals(-5, $this->stockModel->stock);
+    }
+
+    /** @test */
     public function it_can_change_mixed_amount()
     {
         $this->stockModel->setStock(10);
 
         $this->orderRowCreated(1);
-        $this->orderRowCreated(-2);
-        $this->orderRowCreated(4);
-        $this->orderRowCreated(-6);
-        $this->orderRowCreated(8);
-        $this->orderRowCreated(-3);
+        $this->orderRowUpdated(-2);
+        $this->orderRowUpdated(4);
+        $this->orderRowUpdated(-6);
+        $this->orderRowUpdated(8);
+        $this->orderRowUpdated(-3);
 
         $this->assertEquals(8, $this->stockModel->stock);
     }
@@ -127,10 +170,33 @@ class OrderRowTest extends TestCase
 
     protected function orderRowUpdated($amount)
     {
-        $deltaStock = $this->orderRow->amount - $amount;
+        $deltaStock = $this->deltaStock($this->orderRow->amount, $amount);
 
         $this->orderRow->update(['amount' => $amount]);
 
         return $this->orderRow->stockModel->mutateStock($deltaStock);
+    }
+
+    protected function deltaStock($old, $new)
+    {
+        if ($this->positive($old) && $this->negative($new)) {
+            return abs($new);
+        }
+
+        if ($this->negative($old) && $this->positive($new)) {
+            return abs($new) * -1;
+        }
+
+        return $old - $new;
+    }
+
+    protected function negative($integer)
+    {
+        return $integer < 0;
+    }
+
+    protected function positive($integer)
+    {
+        return ! $this->negative($integer);
     }
 }

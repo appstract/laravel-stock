@@ -89,7 +89,7 @@ trait HasStock
     }
 
     /**
-     * Internal function to handle mutations (increase, decrease).
+     * Function to handle mutations (increase, decrease).
      *
      * @param  int $amount
      * @param  array  $arguments
@@ -109,6 +109,34 @@ trait HasStock
         })->toArray();
 
         return $this->stockMutations()->create($createArguments);
+    }
+
+    /*
+     |--------------------------------------------------------------------------
+     | Scopes
+     |--------------------------------------------------------------------------
+     */
+
+    public function scopeWhereInStock($query)
+    {
+        return $query->where(function ($query) {
+            return $query->whereHas('stockMutations', function($query) {
+                return $query->select('stockable_id')
+                    ->groupBy('stockable_id')
+                    ->havingRaw("SUM(amount) > 0");
+            });
+        });
+    }
+
+    public function scopeWhereOutOfStock($query)
+    {
+        return $query->where(function ($query) {
+            return $query->whereHas('stockMutations', function($query) {
+                return $query->select('stockable_id')
+                    ->groupBy('stockable_id')
+                    ->havingRaw("SUM(amount) <= 0");
+            })->orWhereDoesntHave('stockMutations');
+        });
     }
 
     /*

@@ -85,6 +85,15 @@ $book->increaseStock(10, [
 ]);
 ```
 
+### Query Scopes
+
+It is also possible to query based on stock.
+
+```php
+Book::whereInStock()->get();
+Book::whereOutOfStock()->get();
+```
+
 ## Testing
 
 ``` bash

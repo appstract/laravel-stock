@@ -190,7 +190,7 @@ class OrderRowTest extends TestCase
 
     protected function negative($integer)
     {
-        return $integer < 0;
+        return intval($integer) < 0;
     }
 
     protected function positive($integer)

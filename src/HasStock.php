@@ -91,7 +91,7 @@ trait HasStock
     /**
      * Function to handle mutations (increase, decrease).
      *
-     * @param  float $amount
+     * @param  float  $amount
      * @param  array  $arguments
      * @return bool
      */

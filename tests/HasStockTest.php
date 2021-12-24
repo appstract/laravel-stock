@@ -21,7 +21,7 @@ class HasStockTest extends TestCase
         $this->assertEquals(10, $this->stockModel->stock);
     }
 
-     /** @test */
+    /** @test */
     public function it_can_set_initial_stock_float()
     {
         $this->stockModel->setStock(8.94);
@@ -43,19 +43,19 @@ class HasStockTest extends TestCase
         $this->assertEquals(2, $this->stockModel->stock);
     }
 
-        /** @test */
-        public function it_can_set_stock_after_mutations_float()
-        {
-            $this->stockModel->increaseStock(10.34);
-            $this->stockModel->increaseStock(5.23);
-            $this->stockModel->decreaseStock(8.9);
-    
-            $this->assertEquals(6.67, $this->stockModel->stock);
-    
-            $this->stockModel->setStock(2.0);
-    
-            $this->assertEquals(2.0, $this->stockModel->stock);
-        }
+    /** @test */
+    public function it_can_set_stock_after_mutations_float()
+    {
+        $this->stockModel->increaseStock(10.34);
+        $this->stockModel->increaseStock(5.23);
+        $this->stockModel->decreaseStock(8.9);
+
+        $this->assertEquals(6.67, $this->stockModel->stock);
+
+        $this->stockModel->setStock(2.0);
+
+        $this->assertEquals(2.0, $this->stockModel->stock);
+    }
 
     /** @test */
     public function it_can_increase_stock()

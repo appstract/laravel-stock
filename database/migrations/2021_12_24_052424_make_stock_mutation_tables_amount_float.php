@@ -33,4 +33,3 @@ class MakeStockMutationTablesAmountFloat extends Migration
         });
     }
 }
-

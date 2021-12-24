@@ -19,7 +19,7 @@ class StockMutationsTest extends TestCase
 
         $mutations = $this->stockModel->stockMutations->pluck(['amount'])->toArray();
 
-        $this->assertEquals(['10', '1', '-1'], $mutations);
+        $this->assertEquals(['10.0', '1.0', '-1.0'], $mutations);
     }
 
     /** @test */
@@ -30,7 +30,7 @@ class StockMutationsTest extends TestCase
 
         $mutations = $this->stockModel->stockMutations->pluck(['amount'])->toArray();
 
-        $this->assertEquals(['5', '5'], $mutations);
+        $this->assertEquals(['5.0', '5.0'], $mutations);
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class StockMutationsTest extends TestCase
 
         $mutations = $this->stockModel->stockMutations->pluck(['amount'])->toArray();
 
-        $this->assertEquals(['10', '-5'], $mutations);
+        $this->assertEquals(['10.0', '-5.0'], $mutations);
     }
 
     /** @test */

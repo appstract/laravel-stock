@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Make amount column float.
@@ -16,9 +15,7 @@ class MakeStockMutationTablesAmountFloat extends Migration
      */
     public function up()
     {
-        Schema::table('stock_mutations', function (Blueprint $table) {
-            $table->float('amount')->change();
-        });
+        DB::raw('ALTER TABLE stock_mutations MODIFY COLUMN amount FLOAT;');
     }
 
     /**
@@ -28,8 +25,6 @@ class MakeStockMutationTablesAmountFloat extends Migration
      */
     public function down()
     {
-        Schema::table('stock_mutations', function (Blueprint $table) {
-            $table->integer('amount')->change();
-        });
+        DB::raw('ALTER TABLE stock_mutations MODIFY COLUMN amount INTEGER;');
     }
 }
